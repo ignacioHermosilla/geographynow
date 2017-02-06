@@ -27,7 +27,7 @@ class Country(BaseModel):
         video_type = 'country video'
         video_added_at = latest_country.created_at
         if latest_country.flag_friday_video_url:
-            video_type = 'flag fridays video'
+            video_type = 'flag friday video'
             video_added_at = latest_country.updated_at
         return {
             'country': latest_country.name,
