@@ -6,7 +6,7 @@ import re
 import os
 from django.conf import settings
 from .models import Country
-from .utils import send_slack_log
+from .utils import send_slack_alert
 
 BLACK_LIST = ['Bandiaterra', 'DOMINICAN REPUBLIC (Flag Friday)']
 
@@ -56,7 +56,7 @@ def get_best_match(title):
         return None
     else:
         # send slack message
-        send_slack_log("[Geo now] no country", title + ' | ' + original_title)
+        send_slack_alert("[Geo now] no country", title + ' | ' + original_title)
         return None
 
 
@@ -100,7 +100,7 @@ def get_playlist_info(playlist, video_field_name):
                     defaults=defaults
                 )
                 if created:
-                    send_slack_log("[Geo now] new country", country.name)
+                    send_slack_alert("[Geo now] new country", country.name)
 
         search_request = youtube.playlistItems().list_next(
             search_request,
