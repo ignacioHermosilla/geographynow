@@ -16,7 +16,7 @@ class Country(BaseModel):
     code = models.CharField(max_length=3, primary_key=True)
     name = models.CharField(max_length=100)
     geo_video_url = models.URLField()
-    flag_friday_video_url = models.URLField()
+    flag_friday_video_url = models.URLField(null=True)
 
     def __str__(self):
         return self.code.upper()
