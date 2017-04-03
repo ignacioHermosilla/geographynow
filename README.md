@@ -1,4 +1,4 @@
-# geography now! map ([http://geographynow.info](https://geographynow.info))
+# geography now! map ([http://geographynow.info](http://geographynow.info))
 
 Map with the available geography now youtube videos.
 
