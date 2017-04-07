@@ -32,17 +32,22 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous">
+  </script>
   <script id="webpush-js" type="text/javascript" src="{% static 'js/webpush.js' %}"></script>
   <script id="service-worker-js" type="text/javascript" src="{% static 'js/webpush_serviceworker.js' %}"></script>
-  <script type="text/javascript">
-    serviceWorkerRegister();
-  </script>
   <link rel="manifest" href="{% static 'js/manifest.json' %}">
+  <script type="text/javascript">
+    $( document ).ready(function() {
+      console.log("serviceWorkerRegister");
+      serviceWorkerRegister();
+    });
+  </script>
 </head>
 <body>
-  <button style="display: none;" id="webpush-subscribe-button" data-group="test_group" data-url="/save_info">
-    Subscribe to notifications
-  </button>
   <main>
     <div id="tools">
       <button id="drawing" class="button" onclick="toggle(this);">Mark as viewed</button>

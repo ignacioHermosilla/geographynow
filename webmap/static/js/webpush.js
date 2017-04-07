@@ -44,28 +44,6 @@ function serviceWorkerRegister(){
     subscribe(reg)
 }
 
-
-window.addEventListener('load', function() {
-  subBtn = document.getElementById('webpush-subscribe-button');
-
-  subBtn.addEventListener('click',
-    function() {
-      subBtn.disabled = true;
-      if (isPushEnabled) {
-        return unsubscribe()
-      }
-      serviceWorkerRegister();
-
-    }
-  );
-
-  // Once the service worker is registered set the initial state  
-  function initialiseState(reg) {
-    initialiseSubscription(reg);
-  }
-}
-);
-
 function subscribe(reg) {
   // Get the Subscription or register one
   getSubscription(reg)
