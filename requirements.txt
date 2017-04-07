@@ -9,3 +9,5 @@ google-api-python-client
 pycountry
 arrow
 newrelic
+django-webpush
+pywebpush

@@ -2,11 +2,13 @@ from apiclient.discovery import build
 import pycountry
 import difflib
 import arrow
+import json
 import re
 import os
 from django.conf import settings
 from .models import Country
-from .utils import send_slack_log
+from webpush.models import SubscriptionInfo
+from .utils import send_slack_log, send_push_notification
 
 BLACK_LIST = ['Bandiaterra', 'DOMINICAN REPUBLIC (Flag Friday)']
 
@@ -100,7 +102,24 @@ def get_playlist_info(playlist, video_field_name):
                     defaults=defaults
                 )
                 if created:
+                    # internal notification
                     send_slack_log("[Geo now] new country", country.name)
+                    # notify to subscribed users (web push)
+                    # @@TODO: move this from here to an async task
+                    if settings.WEBPUSH_ENABLED:
+                        if video_field_name == 'geo_video_url':
+                            body = 'New flag friday video'
+                        else:
+                            body = 'New country video'
+
+                        payload = {
+                            "head": country.name,
+                            "body": body,
+                            "icon": country.flag_icon,
+                        }
+                        json_payload = json.dumps(payload)
+                        for subscription in SubscriptionInfo.objects.all():
+                            send_push_notification(subscription, json_payload, ttl=7000)
 
         search_request = youtube.playlistItems().list_next(
             search_request,

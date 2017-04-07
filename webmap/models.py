@@ -21,6 +21,10 @@ class Country(BaseModel):
     def __str__(self):
         return self.code.upper()
 
+    @property
+    def flag_icon(self):
+        return '/static/img/flags/flags_iso/32/{}.png'.format(self.code.lower())
+
     @classmethod
     def get_latest_video_info(cls):
         latest_country = Country.objects.all().latest('created_at')

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import dj_database_url
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +29,7 @@ DEBUG = False
 
 # Application definition
 
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpush',
     'webmap',
 )
 
@@ -45,7 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -114,6 +115,11 @@ YOUTUBE_DEVELOPER_KEY = ""
 
 # set hooks for alarms (optional)
 SLACK_URL = ""
+
+# web push notification
+WEBPUSH_ENABLED = True
+GCM_ID = ""
+GCM_KEY = ""
 
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config()

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load webpush_notifications %}
 {% load static %}
 <!doctype html>
 <html>
@@ -21,11 +22,7 @@
     <link href="{% static 'css/normalize.min.css'%}" rel="stylesheet">
     <link href="{% static 'ammap/ammap.css'%}" rel="stylesheet">
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
-    <link
-    rel="stylesheet"
-    type="text/css"
-
-    href="{% static 'flags/stylesheets/flags32.css' %}"
+    <link rel="stylesheet" type="text/css" href="{% static 'flags/stylesheets/flags32.css' %}"
 />
     <!-- Theme CSS -->
 
@@ -35,8 +32,17 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+  <script id="webpush-js" type="text/javascript" src="{% static 'js/webpush.js' %}"></script>
+  <script id="service-worker-js" type="text/javascript" src="{% static 'js/webpush_serviceworker.js' %}"></script>
+  <script type="text/javascript">
+    serviceWorkerRegister();
+  </script>
+  <link rel="manifest" href="{% static 'js/manifest.json' %}">
 </head>
 <body>
+  <!--<button id="webpush-subscribe-button" data-group="test_group" data-url="/save_info">
+    Subscribe to notifications
+  </button>-->
   <main>
     <div id="tools">
       <button id="drawing" class="button" onclick="toggle(this);">Mark as viewed</button>
