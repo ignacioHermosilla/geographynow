@@ -85,7 +85,7 @@ def subscribe_or_unsubscribe_notification(request):
 
 
 def ssl_validation(request):
-    return HttpResponse('OQecUaQqjP5Ad45hrCVMxJ0XH-RcIlNABeTDO-Emtms.ym40afnU_Hv1HO8gncd2acXeeMyBJrIECmfopGGZc08')
+    return HttpResponse('mNZkbVd5oHqE0ntSszAnGdNWMM4IlhaWhQ531RnPYn0.ym40afnU_Hv1HO8gncd2acXeeMyBJrIECmfopGGZc08')
 
 
 def index(request):
