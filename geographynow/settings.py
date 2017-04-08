@@ -104,7 +104,7 @@ USE_L10N = True
 USE_TZ = True
 
 RAVEN_CONFIG = {
-    'dsn': os.get_env('SENTRY_URL', ''),
+    'dsn': os.getenv('SENTRY_URL', ''),
 }
 
 # webmap settings
