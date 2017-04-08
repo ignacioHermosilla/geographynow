@@ -84,10 +84,6 @@ def subscribe_or_unsubscribe_notification(request):
     return HttpResponse(status=400)
 
 
-def ssl_validation(request):
-    return HttpResponse('mNZkbVd5oHqE0ntSszAnGdNWMM4IlhaWhQ531RnPYn0.ym40afnU_Hv1HO8gncd2acXeeMyBJrIECmfopGGZc08')
-
-
 def index(request):
     data = get_countries_info()
     existing_countries = map(str, data.keys())

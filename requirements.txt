@@ -11,3 +11,4 @@ arrow
 newrelic
 django-webpush
 pywebpush
+raven

@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'raven.contrib.django.raven_compat',
     'webpush',
     'webmap',
 )
@@ -101,6 +102,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+RAVEN_CONFIG = {
+    'dsn': os.get_env('SENTRY_URL', ''),
+}
 
 # webmap settings
 GEOGRAPHY_NOW_CHANNEL = 'UCmmPgObSUPw1HL2lq6H4ffA'
