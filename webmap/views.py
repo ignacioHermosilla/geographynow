@@ -2,6 +2,7 @@ from django.shortcuts import render
 import json
 import collections
 import arrow
+from django.http import HttpResponse
 from django.conf import settings
 from .models import Country
 from django.forms.models import model_to_dict
@@ -81,6 +82,10 @@ def subscribe_or_unsubscribe_notification(request):
             return HttpResponse(status=202)
 
     return HttpResponse(status=400)
+
+
+def ssl_validation(request):
+    return HttpResponse('OQecUaQqjP5Ad45hrCVMxJ0XH-RcIlNABeTDO-Emtms.ym40afnU_Hv1HO8gncd2acXeeMyBJrIECmfopGGZc08')
 
 
 def index(request):

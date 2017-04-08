@@ -11,5 +11,6 @@ urlpatterns = [
         webmap.views.subscribe_or_unsubscribe_notification,
         name='subscribe_or_unsubscribe_notification'
     ),
+    url('well-known/acme-challenge/OQecUaQqjP5Ad45hrCVMxJ0XH-RcIlNABeTDO-Emtms', webmap.views.ssl_validation),
     url(r'^webpush/', include('webpush.urls'))
 ]
