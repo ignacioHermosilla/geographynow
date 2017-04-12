@@ -108,9 +108,9 @@ def get_playlist_info(playlist, video_field_name):
                     # @@TODO: move this from here to an async task
                     if settings.WEBPUSH_ENABLED:
                         if video_field_name == 'geo_video_url':
-                            body = 'New flag friday video'
-                        else:
                             body = 'New country video'
+                        else:
+                            body = 'New flag friday video'
 
                         payload = {
                             "head": country.name,
