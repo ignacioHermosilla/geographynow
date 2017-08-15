@@ -1,13 +1,9 @@
 from django.shortcuts import render
 import json
 import collections
-import arrow
 from django.http import HttpResponse
-from django.conf import settings
 from .models import Country
-from django.forms.models import model_to_dict
 
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
