@@ -4,6 +4,13 @@ html, body{
 	height: 100%;
 }
 
+@import url("https://fonts.googleapis.com/css?family=Homemade+Apple");
+
+.amcharts-map-image-label tspan {
+  font-family: 'Homemade Apple', cursive;
+  font-size: 15px!important;
+}
+
 main{
 	width: 100%;
 	height: 100%;
@@ -11,13 +18,6 @@ main{
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: stretch;
-}
-
-#map{
-	width: auto;
-	height: auto;
-	flex-grow: 2;
-	background-color: #78CDD6;
 }
 
 #sidebar{

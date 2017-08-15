@@ -11,8 +11,29 @@
   left: 70px;
   z-index: 100;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.1);
 }
+body { background-color: #3f3e3b; color: #fff; }
+#map {
+  width: 100%;
+  height: 500px;
+}
+#drawing {
+  background-color: #c0718d;
+   color: #000;
+   border-color: #000;
+   font-family: 'Rubik', sans-serif;
+   border-radius: 15px;
+   border-style: solid;
+}
+
+</style>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope');
+</style>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Rubik');
 </style>
 <head>
     <meta charset="utf-8">
@@ -20,7 +41,7 @@
     <meta name="description" content="Map with the available geography now youtube videos.">
     <meta name="author" content="Ignacio Hermosilla">
     <link href="{% static 'css/normalize.min.css'%}" rel="stylesheet">
-    <link href="{% static 'ammap/ammap.css'%}" rel="stylesheet">
+    <!--<link href="{% static 'ammap/ammap.css'%}" rel="stylesheet">-->
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'flags/stylesheets/flags32.css' %}"
 />
@@ -50,7 +71,7 @@
 <body>
   <main>
     <div id="tools">
-      <button id="drawing" class="button" onclick="toggle(this);">Mark as viewed</button>
+      <button id="drawing" class="button" onclick="toggle(this);">Mark as seen</button>
     </div>
     <section id="map"></section>
     <div id="sidebar">
@@ -72,8 +93,10 @@
 </body>
     <script src="https://project-8592927377019857446.firebaseapp.com/images/geonow/static/js/jquery-1.12.4.min.js"></script>
     <script src="https://project-8592927377019857446.firebaseapp.com/images/geonow/static/js/list.min.js"></script>
-    <script src="https://project-8592927377019857446.firebaseapp.com/images/geonow/static/ammap/ammap.js"></script>
-    <script src="https://project-8592927377019857446.firebaseapp.com/images/geonow/static/ammap/maps/js/worldIndiaHigh.js"></script>
+
+    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+    <script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>
   
     <script type="text/javascript" async>
       data = {{ data|safe }} || {};
@@ -92,8 +115,11 @@
       function initMap() {
         map = AmCharts.makeChart("map", {
           type: "map",
+          theme: "chalk",
+          projection: "eckert3",
+          fontFamily: "Annie Use Your Telescope",
           dataProvider: {
-            map: "worldIndiaHigh",
+            map: "worldLow",
             getAreasFromMap: true
           },
           zoomControl: {
@@ -113,7 +139,9 @@
             preSelectCountries( {{ areas|safe }});
             }
           }],
-          smallMap: {}
+          smallMap: {
+            bottom: 10,
+          }
         });
         
         map.addListener("clickMapObject", function (event) {
@@ -127,7 +155,7 @@
         width: "100%",
         equalWidths: false,
         align: "left",
-        top: 750,
+        bottom: 10,
         horizontalGap: 3,
         data: [{
             title: "Available country",
@@ -139,8 +167,8 @@
       ]
     };
 
-      map.addLabel(5, "10", "Conquer the world (" + "{{message|safe }}" + ")", "center", 20, "#000000", 0, 1, false);
-      map.addLabel(5, "!18", "Map updated " + "{{ updated_at|safe }}", "center", 11, "#000000", 0, 1, false);
+      map.addLabel(5, "40", "Conquer the world (" + "{{message|safe }}" + ")", "center", 40, "#fff", 0, 1, false);
+      map.addLabel(5, "!18", "Map updated " + "{{ updated_at|safe }}", "center", 13, "#fff", 0, 1, false);
       }
 
 
