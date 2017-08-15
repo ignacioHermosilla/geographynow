@@ -161,7 +161,7 @@ body { background-color: #3f3e3b; color: #fff; }
             title: "Available country",
             color: "#CC0000"
         }, {
-            title: "Viewed by me",
+            title: "Conquered (seen)",
             color: "#008000"
         }
       ]
@@ -229,6 +229,9 @@ body { background-color: #3f3e3b; color: #fff; }
       function preSelectCountries(list) {
         for(var i = 0; i < list.length; i++) {
           var area = map.getObjectById(list[i]);
+          if (area === undefined){
+            continue;
+          }
           //area.showAsSelected = true;
           var color = Math.floor(Math.random() * 0xffffff);
           if(viewedCountry(list[i])){
