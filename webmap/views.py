@@ -96,6 +96,6 @@ def index(request):
         'data': json.dumps(data),
         'areas': existing_countries,
         'updated_at': updated_info,
-        'message': 'of geography now!',
+        'message': 'of Geography Now!',
     }
     return render(request, 'index.html', context=context)
