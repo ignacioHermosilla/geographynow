@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 import arrow
+import urllib
 
 
 class BaseModel(models.Model):
@@ -20,6 +21,10 @@ class Country(BaseModel):
 
     def __str__(self):
         return self.code.upper()
+
+    def get_absolute_url(self):
+        url = "/" + self.name
+        return urllib.quote(url)
 
     @property
     def flag_icon(self):

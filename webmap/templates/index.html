@@ -37,8 +37,8 @@ body { background-color: #3f3e3b; color: #fff; }
 </style>
 <head>
     <meta charset="utf-8">
-    <title>Geography Now map</title>
-    <meta name="description" content="Map with the available geography now youtube videos.">
+    <title>{{ title|safe }}</title>
+    <meta name="description" content="{{ description|safe }}">
     <meta name="author" content="Ignacio Hermosilla">
     <link href="{% static 'css/normalize.min.css'%}" rel="stylesheet">
     <!--<link href="{% static 'ammap/ammap.css'%}" rel="stylesheet">-->
@@ -111,16 +111,20 @@ body { background-color: #3f3e3b; color: #fff; }
         initMap();
       });
 
+      var dataProvider =  {}
+      dataProvider['map'] = "worldHigh";
+      dataProvider['getAreasFromMap'] = true
+      if ("{{initial_country|safe}}" !== "None"){
+        dataProvider['linkToObject'] = "{{initial_country|safe}}";
+      }
+
       function initMap() {
         map = AmCharts.makeChart("map", {
           type: "map",
           theme: "chalk",
           projection: "eckert3",
           fontFamily: "Annie Use Your Telescope",
-          dataProvider: {
-            map: "worldHigh",
-            getAreasFromMap: true
-          },
+          dataProvider: dataProvider,
           zoomControl: {
             zoomControlEnabled: true,
             maxZoomLevel: 10
@@ -165,7 +169,13 @@ body { background-color: #3f3e3b; color: #fff; }
 
       map.addLabel(5, "40", "Conquer the world (" + "{{message|safe }}" + ")", "center", 40, "#fff", 0, 1, false);
       map.addLabel(5, "!18", "Map updated " + "{{ updated_at|safe }}", "center", 13, "#fff", 0, 1, false);
+      
+      if ("{{initial_country|safe}}" !== null){
+        countryClick("{{initial_country|safe}}");
       }
+
+
+    }
 
 
       function initList() {

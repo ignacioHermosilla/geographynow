@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import json
+import urllib
 import collections
 from django.http import HttpResponse
 from .models import Country
@@ -8,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from webpush.forms import WebPushForm, SubscriptionForm
+from django.contrib.sitemaps import Sitemap
 
 
 """
@@ -41,6 +43,17 @@ def get_countries_info():
 """
 Views
 """
+
+
+class CountrySitemap(Sitemap):
+    changefreq = "never"
+    priority = 0.8
+
+    def items(self):
+        return Country.objects.filter()
+
+    def lastmod(self, obj):
+        return obj.created_at
 
 
 @require_POST
@@ -80,7 +93,7 @@ def subscribe_or_unsubscribe_notification(request):
     return HttpResponse(status=400)
 
 
-def index(request):
+def _get_context(initial_country=None):
     data = get_countries_info()
     existing_countries = map(str, data.keys())
     # @@TODO: handle empty database
@@ -93,9 +106,32 @@ def index(request):
     )
 
     context = {
+        'title': 'Geography Now map',
+        'description': 'Map with the available geography now videos.',
         'data': json.dumps(data),
         'areas': existing_countries,
         'updated_at': updated_info,
         'message': 'of Geography Now!',
+        'initial_country': None
     }
+    if initial_country:
+        context['title'] = 'Geography Now map {}'.format(initial_country.name)
+        context['description'] = '{}. Map with the available geography now videos.'.format(initial_country.name)
+        context['initial_country'] = initial_country.code
+
+    return context
+
+
+def country_index(request, country_name):
+    country_name = urllib.unquote(urllib.unquote(country_name))
+    try:
+        country = Country.objects.get(name=country_name)
+        context = _get_context(country)
+    except Country.DoesNotExist:
+        context = _get_context()
+    return render(request, 'index.html', context=context)
+
+
+def index(request):
+    context = _get_context()
     return render(request, 'index.html', context=context)
