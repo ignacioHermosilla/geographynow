@@ -26,7 +26,7 @@ SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
+SITE_ID = 1
 # Application definition
 
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django.contrib.sitemaps',
     'raven.contrib.django.raven_compat',
     'webpush',
