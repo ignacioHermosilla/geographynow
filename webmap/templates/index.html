@@ -7,7 +7,7 @@
 <style>
 #tools {
   position: absolute;
-  top: 30px;
+  top: 18px;
   left: 70px;
   z-index: 100;
   padding: 10px;
@@ -63,7 +63,6 @@ body { background-color: #3f3e3b; color: #fff; }
   <link rel="manifest" href="{% static 'js/manifest.json' %}">
   <script type="text/javascript">
     $( document ).ready(function() {
-      console.log("serviceWorkerRegister");
       serviceWorkerRegister();
     });
   </script>
@@ -95,7 +94,7 @@ body { background-color: #3f3e3b; color: #fff; }
     <script src="https://project-8592927377019857446.firebaseapp.com/images/geonow/static/js/list.min.js"></script>
 
     <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
-    <script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ammaps/3.13.0/maps/js/worldHigh.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>
   
     <script type="text/javascript" async>
@@ -119,7 +118,7 @@ body { background-color: #3f3e3b; color: #fff; }
           projection: "eckert3",
           fontFamily: "Annie Use Your Telescope",
           dataProvider: {
-            map: "worldLow",
+            map: "worldHigh",
             getAreasFromMap: true
           },
           zoomControl: {
@@ -138,10 +137,7 @@ body { background-color: #3f3e3b; color: #fff; }
           "method": function(e) {
             preSelectCountries( {{ areas|safe }});
             }
-          }],
-          smallMap: {
-            bottom: 10,
-          }
+          }]
         });
         
         map.addListener("clickMapObject", function (event) {
@@ -276,17 +272,17 @@ body { background-color: #3f3e3b; color: #fff; }
 
       function toggle( b ) {
         var viewedCountries = JSON.parse(localStorage.getItem("countries"));
-        if (viewedCountries.indexOf(selectedCountry) == -1){
+        var area = map.getObjectById(selectedCountry);
+        if (viewedCountries.indexOf(selectedCountry) == -1 && area.color !== undefined){
           viewedCountries.push(selectedCountry);
           localStorage.setItem("countries", JSON.stringify(viewedCountries));
+          var color = '#008000';
+          area.color = color;
+          area.colorReal = area.color;
+          area.validate();
+          initList();
+          map.returnInitialColor(area);
         }
-        var color = '#008000';
-        var area = map.getObjectById(selectedCountry);
-        area.color = color;
-        area.colorReal = area.color;
-        area.validate();
-        initList();
-        map.returnInitialColor(area);
       }
 
     </script>
