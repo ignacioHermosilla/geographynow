@@ -35,7 +35,7 @@ def get_countries_info():
         data[country.code] = {
             'youtube': country.geo_video_url,
             'name': country.name,
-            'flag_friday_video_url': country.flag_friday_video_url or country.geo_video_url
+            'flag_friday_video_url': country.geo_video_url  # @TODO: temporary, decide if remove completely flag friday videos
         }
     return data
 

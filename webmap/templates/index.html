@@ -185,7 +185,7 @@ body { background-color: #3f3e3b; color: #fff; }
           viewedCountries = [];
         }
         // populate list
-        listElement.html('<tr><td style="border-right: solid 1px #383A3F;border-bottom: solid 1px #383A3F" ><small><strong>Flag Fridays<strong></small></td><td style="border-right: solid 1px #383A3F;border-bottom: solid 1px #383A3F"><strong><small>Geography Video</small></strong></td></tr>');
+        listElement.html('<tr><td style="border-right: solid 1px #383A3F;border-bottom: solid 1px #383A3F" ><small><strong><strong></small></td><td style="border-right: solid 1px #383A3F;border-bottom: solid 1px #383A3F"><strong><small>Geography Video</small></strong></td></tr>');
         for(country in data) {
           var country_flag = 'img/flags/flags_iso/32/' + country.toLowerCase() + '.png';
           var img_url = '<img ' + 'onClick="flagClick(\''+ country + '\')"src="{% static "' + country_flag + '" %}" alt="My image"/>'
