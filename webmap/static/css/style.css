@@ -52,7 +52,7 @@ main{
 	animation-name: bling;
 	animation-iteration-count: infinite;
 }
-#video.no:before{content: 'No flag or country video';}
+#video.no:before{content: 'Select a country';}
 @keyframes bling {
 	0%{color: #000;}
 	50%{color: #fff;}
